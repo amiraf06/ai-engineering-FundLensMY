@@ -48,7 +48,7 @@ Malaysian students looking for post-SPM or post-diploma scholarship and study-lo
 | Week | Focus | Deliverable | Status |
 |------|-------|-------------|--------|
 | W1 | System map + project scope | README + docs (`week1_observation_sheet.md`, `week1_system_map.png`, `week1_project_scope.md`) | Completed |
-| W2 | Source audit, evidence, requirements | Final document list, survey results, evaluation criteria | Planned |
+| W2 | Source audit, evidence, requirements | Final document list, evaluation criteria | Planned |
 
 ## Disclaimer
 FundLensMY provides information extracted from official documents and is not a substitute for the agencies themselves. Users should always confirm requirements and deadlines on the official portals before applying.
