@@ -13,7 +13,7 @@ AI engineering is suitable here because student questions are written in free-fo
 - **Evidence 2 — Funding requirements are publicly debated as a barrier for school leavers.** A student union president claimed that strict financing conditions discourage SPM leavers from continuing to higher education, while the Minister of Higher Education disputed this. The same article notes that JPA sponsorship expects very high SPM results. The disagreement shows that students find the requirements difficult to interpret.  
   *Source:* Sinar Harian, *KPT nafi syarat ketat biasiswa punca tidak lanjut pengajian*. https://www.sinarharian.com.my/ampArticle/264771
 - **Evidence 3 — Loan and scholarship categories overlap.** PTPTN offers BAeK PTPTN, which converts the loan of eligible students into a scholarship that does not need to be repaid. A system that answers funding questions must therefore keep loan and scholarship information clearly distinguished.  
-  *Source:* RinggitPlus, *PTPTN sasar 10,000 pelajar terima Biasiswa Anak eKasih*. https://ringgitplus.com/ms/blog/berita-kewangan-peribadi/ptptn-sasar-10000-pelajar-terima-biasiswa-anak-ekasih/
+  *Source:* RinggitPlus, *PTPTN sasar 10,000 pelajar terima Biasiswa Anak eKasih*. https://ringgitplus.com/ms/blog/berita-kewangan-peribadi/ptptn-sasar-10000-pelajar-terima-biasiswa-anak-ekasih.html
 
 ## Initial Related Work / Existing Approaches
 1. **Official agency portals and helpdesks (e.g. PTPTN, JPA, MARA).**  
@@ -45,10 +45,25 @@ Malaysian students looking for post-SPM or post-diploma scholarship and study-lo
 *Note:* Only source URLs, metadata, and dates checked are stored in this repository. Official documents are not redistributed.
 
 ## Weekly Progress
-| Week | Focus | Deliverable | Status |
-|------|-------|-------------|--------|
-| W1 | System map + project scope | README + docs (`week1_observation_sheet.md`, `week1_system_map.png`, `week1_project_scope.md`) | Completed |
-| W2 | Source audit, evidence, requirements | Final document list, evaluation criteria | Planned |
+The plan follows the SAIA 3113 AI Engineering course schedule (Weeks 1–15). Status is updated each week as deliverables are committed.
+
+| Week | Course Topic | FundLensMY Focus | Planned Deliverable | Status |
+|------|--------------|------------------|---------------------|--------|
+| W1 | T1: AI Engineering Landscape | System map + project scope | README + docs (`week1_observation_sheet.md`, `week1_system_map.png`, `week1_project_scope.md`) | Completed |
+| W2 | T2: Requirements, Architecture, Evaluation Criteria | Source audit; functional and non-functional requirements; draft architecture; initial evaluation criteria | Final document list, requirements doc, architecture diagram, evaluation criteria | Planned |
+| W3 | T3: Data Engineering (Pipelines, Lineage) | Document ingestion pipeline: extract text, clean, chunk, attach metadata (agency, document, page, date checked) | Working ingestion notebook + `src/` modules, data lineage notes | Planned |
+| W4 | T4: Data Quality and Responsible Data Practices | Data quality checks (extraction errors, duplicates, outdated versions); licensing and redistribution review | Data quality report, data documentation | Planned |
+| W5 | T5: Selecting the Right Model | Compare embedding models and LLM options (build / buy / fine-tune decision) on a small test set | Model selection report with trade-offs (accuracy, latency, cost) | Planned |
+| W6 | T6: Prompt Engineering, Structured Outputs, Guardrails | System prompt, structured JSON answer format (answer, quote, source), abstention and scope guardrails | Versioned prompts in `prompts/`, guardrail implementation | Planned |
+| W7 | Proposal Presentation | Consolidate Weeks 1–6 into the proposal | Project proposal document + Proposal presentation | Planned |
+| W8 | Semester Break | Buffer: catch up, draft the 30–50 question benchmark set with reference answers | Draft evaluation set | Planned |
+| W9 | T7: RAG and Agentic AI | Vector store, retrieval (semantic + keyword), generation with citations, citation verification, simple chat UI | Working end-to-end RAG prototype | Planned |
+| W10 | T8: Evaluating AI Systems | Run benchmark: retrieval relevance, information accuracy, citation correctness, unsupported-claim rate, latency; compare answer quality across agencies | Evaluation results in `evaluation/`, error analysis | Planned |
+| W11 | T9: CI/CD for AI | Automated tests and evaluation regression checks on every commit (GitHub Actions) | CI workflow + automated test suite | Planned |
+| W12 | T10: Deploying AI Applications | Expose the assistant as an API and a shareable web interface | Deployed demo + deployment notes | Planned |
+| W13 | T11: Observability and Continuous Improvement | Logging of queries, retrieved passages and answers; feedback capture; review of failures to improve the system | Logging and monitoring setup, improvement log | Planned |
+| W14 | T12: Responsible AI Engineering | Risk review (hallucination, outdated information, fairness across agencies), limitations and governance documentation | Responsible AI audit + final documentation | Planned |
+| W15 | AI Engineering Showcase | Final system, evidence and justification | Final presentation + final repository | Planned |
 
 ## Disclaimer
 FundLensMY provides information extracted from official documents and is not a substitute for the agencies themselves. Users should always confirm requirements and deadlines on the official portals before applying.
