@@ -14,7 +14,6 @@ AI engineering is suitable here because student questions are written in free-fo
   *Source:* Sinar Harian, *KPT nafi syarat ketat biasiswa punca tidak lanjut pengajian*. https://www.sinarharian.com.my/ampArticle/264771
 - **Evidence 3 — Loan and scholarship categories overlap.** PTPTN offers BAeK PTPTN, which converts the loan of eligible students into a scholarship that does not need to be repaid. A system that answers funding questions must therefore keep loan and scholarship information clearly distinguished.  
   *Source:* RinggitPlus, *PTPTN sasar 10,000 pelajar terima Biasiswa Anak eKasih*. https://ringgitplus.com/ms/blog/berita-kewangan-peribadi/ptptn-sasar-10000-pelajar-terima-biasiswa-anak-ekasih/
-- **Evidence 4 (planned) — Short student survey.** A small Google Form survey with course mates on how hard it is to find and understand funding requirements (Results to be integrated in Week 2/3).
 
 ## Initial Related Work / Existing Approaches
 1. **Official agency portals and helpdesks (e.g. PTPTN, JPA, MARA).**  
