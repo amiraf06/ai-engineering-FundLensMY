@@ -24,8 +24,6 @@ An AI-based solution is suitable because students ask questions in different way
   * **Source:** RinggitPlus, *PTPTN sasar 10,000 pelajar terima Biasiswa Anak eKasih*.
   * **URL:** https://ringgitplus.com/ms/blog/berita-kewangan-peribadi/ptptn-sasar-10000-pelajar-terima-biasiswa-anak-ekasih/
 
-- **Evidence 4 - Planned student survey:** A short Google Forms survey will be conducted among university course mates in Week 2/3 to investigate the difficulties they face when finding and understanding scholarship and education funding requirements. The findings will be used to refine the problem statement and project requirements.
-
 ## 3. Initial Related Work
 
 ### 3.1 Official Agency Portals and Helpdesks
