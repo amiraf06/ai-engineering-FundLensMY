@@ -1,0 +1,9 @@
+Part B Reflection:
+Component with most annotations:
+The Ranking Model and Recommended Home Feed interactions contain the highest concentration of "what could go wrong?" annotations. Some of the specific risks identified by the map include popularity bias in the Ranking Model, which makes it difficult for lesser-known people to get visibility and also Over-reliance on past behavior, where users fall into a filter bubble and end up seeing only similar content all the time. Moreover, there is no transparency in the Recommended Home Feed, hence “no explanation of why a video appears.”
+
+Where engineering effort should be concentrated:
+This means that the efforts of the engineers should be focused on the Ranking Model to counteract the problem of popularity bias, and to add diversity to recommendations, as well as to implementing the Content Policy Filter. Moreover, there should be created an explanation layer for the User Interface to ensure that users know why they receive particular pieces of content and how they can modify their recommendations.
+
+Connection to Topic 1 Quality Dimensions:
+This directly ties into the information collected in Part A. The system displayed poor Adaptability since viewing a 5-minute underwater video did not change the primary feed, which means that it is rigid when it comes to prioritizing past history over the current intent of the user. This also indicates poor Fairness since it promotes huge channels, for example, a video with 18 million views despite warnings on the map about the bias toward popularity. Lastly, about Personalization Relevance, although the system does manage to identify the long-term interest of the user, it does not manage to cater to the present interest of the user. Since the Top 10 recommendations kept revolving around the same music and gaming videos, it stops the user from finding new, relevant content.
