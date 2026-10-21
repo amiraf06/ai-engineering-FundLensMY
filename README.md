@@ -1,69 +1,94 @@
-# FundLensMY — An Evidence-Linked Assistant for Malaysian Scholarship and Education Funding Information
+# TicketIQ: AI-Assisted Support Ticket Triage and Similar-Case Retrieval
 
-> FundLensMY is a document-grounded question-answering assistant that helps Malaysian students find scholarship and study-loan information, answering only from official documents, citing its sources, and declining to answer when the evidence is insufficient.
+TicketIQ is a proposed AI Engineering prototype for IT support teams. It will classify the text of a new support ticket, retrieve similar historical tickets, and display recorded resolutions only when the data provides a sufficiently relevant reference. It is a human decision-support tool, not an autonomous system.
 
 ## Problem Statement
-Malaysian students looking for education funding must read guidelines published separately by different agencies (e.g. JPA, MARA, PTPTN). Each agency has its own eligibility rules, document format and update cycle, and some schemes blur the line between loans and scholarships. Reading and comparing these documents manually is slow and error-prone.
 
-AI engineering is suitable here because student questions are written in free-form, mixed Malay/English language, and the answer often has to be assembled from several sections of a document. FundLensMY retrieves the relevant passages from official documents and generates an answer that is restricted to those passages, with a citation for every claim. It aims to reduce unsupported claims and to measure how often they still occur. It provides information only and does not make final eligibility decisions.
+Support staff may need to manually read incoming tickets, assign categories, and search historical tickets for related cases. Research and existing tools demonstrate that ticket classification and AI-assisted support are practical tasks to investigate [1–3]. This project has not independently measured the size of the problem in a specific organisation, so it will evaluate a prototype using public data rather than claim a measured business impact.
 
 ## Evidence of the Problem
-- **Evidence 1 — Funding rules involve several conditions and change over time.** News coverage of PTPTN's Wang Pendahuluan Pinjaman (advance loan money) reports that eligibility depends on additional conditions such as the parent or guardian receiving STR, and that new PTPTN applicants are expected to hold an SSPN savings account. A student must track conditions like these across separate announcements and documents.  
-  *Source:* Utusan Malaysia (2025), *27,674 pelajar terima Wang Pendahuluan Pinjaman bernilai RM41.5 juta – PTPTN*. https://www.utusan.com.my/nasional/2025/09/27674-pelajar-terima-wang-pendahuluan-pinjaman-bernilai-rm41-5-juta-ptptn/
-- **Evidence 2 — Funding requirements are publicly debated as a barrier for school leavers.** A student union president claimed that strict financing conditions discourage SPM leavers from continuing to higher education, while the Minister of Higher Education disputed this. The same article notes that JPA sponsorship expects very high SPM results. The disagreement shows that students find the requirements difficult to interpret.  
-  *Source:* Sinar Harian, *KPT nafi syarat ketat biasiswa punca tidak lanjut pengajian*. https://www.sinarharian.com.my/ampArticle/264771
-- **Evidence 3 — Loan and scholarship categories overlap.** PTPTN offers BAeK PTPTN, which converts the loan of eligible students into a scholarship that does not need to be repaid. A system that answers funding questions must therefore keep loan and scholarship information clearly distinguished.  
-  *Source:* RinggitPlus, *PTPTN sasar 10,000 pelajar terima Biasiswa Anak eKasih*. https://ringgitplus.com/ms/blog/berita-kewangan-peribadi/ptptn-sasar-10000-pelajar-terima-biasiswa-anak-ekasih.html
 
-## Initial Related Work / Existing Approaches
-1. **Official agency portals and helpdesks (e.g. PTPTN, JPA, MARA).**  
-   *Source:* https://www.ptptn.gov.my/  
-   *Key limitation:* Authoritative, but each agency covers only its own schemes, so students must search several portals, and human helpdesks depend on staff availability.
-2. **Third-party explainer and aggregator sites.**  
-   *Source (example):* https://ecentral.my/ptptn/  
-   *Key limitation:* Convenient to read and bring information together, but they are secondary sources whose content may lag behind official updates and do not link each statement to a specific official document and date.
-3. **General-purpose AI assistants and Retrieval-Augmented Generation (RAG).**  
-   *Source:* Lewis et al. (2020), *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*. https://arxiv.org/abs/2005.11401  
-   *Key limitation:* General assistants are flexible but are not guaranteed to use current official documents. RAG grounds generation in retrieved text, but it does not by itself guarantee that the extracted information is accurate or that each citation really supports the claim.
+- A 2021 help-desk study reported that using ticket comments and descriptions improved classification accuracy from 53.8% to 81.4% in its experiment [1]. This result is not a performance claim for TicketIQ.
+- A Microsoft/Endava proof-of-concept describes automatic classification of support tickets and around 50,000 labelled tickets from its help-desk source [2].
+- Atlassian documents AI suggestions based on work-item context and similar past work items [3]. Similar features already exist, so TicketIQ will not claim to be the first.
+
+## Initial Related Work
+
+| Work / solution | Existing capability | Relevant limitation or project distinction |
+|---|---|---|
+| Al-Hawari & Barham (2021) [1] | Machine-learning ticket classification in a help-desk system. | TicketIQ will separately evaluate whether historical-ticket retrieval and recorded resolution references are useful. |
+| Microsoft / Endava ticket-classification proof-of-concept [2] | Text preprocessing, ticket-field classification, and a web-service example. | Its documented focus is classification; TicketIQ's project evaluation also covers retrieval relevance and evidence display. |
+| Atlassian Jira Service Management AI suggestions [3] | Suggestions based on work-item context and similar past items. | TicketIQ will display the retrieved historical records as inspectable evidence. This is a design difference, not a claim of superiority. |
+| ServiceNow priority lookup rules [6] | Priority can be determined by configured impact and urgency rules. | Priority prediction is optional because learning rule-generated labels may not provide meaningful added value. |
 
 ## Engineering Gap / Limitation
-Existing approaches are either fragmented across agencies, secondary and possibly outdated, or not guaranteed to be grounded in official documents. What remains unresolved is a small, reproducible retrieval system for Malaysian funding documents that attaches verifiable citations to its answers, abstains when evidence is insufficient, and is evaluated against a manually verified test set, so that unsupported claims can be reduced and measured.
 
-## Project Objectives
-- **O1:** To design a document-grounded assistant for Malaysian scholarship and study-loan information based on official documents.
-- **O2:** To develop the assistant using retrieval-augmented generation, citation verification, and guardrails that make it abstain when evidence is insufficient.
-- **O3:** To evaluate the assistant using 30–50 benchmark questions, measuring retrieval relevance, information accuracy, citation correctness, unsupported-claim rate, and response latency.
+TicketIQ does not claim that similar systems do not exist. Its practical goal is to implement and evaluate a small public-data prototype that combines ticket-category prediction, similar-ticket retrieval, and visible references to usable historical resolutions. If the selected dataset's resolution field is unreliable, resolution suggestion will be excluded rather than fabricated.
+
+## Initial Project Objectives
+
+1. Develop and evaluate a baseline machine-learning model for classifying support-ticket text.
+2. Build similar-ticket retrieval and show any reliable recorded resolution associated with matching cases.
+3. Evaluate classification quality, retrieval relevance, and whether the system correctly abstains when no suitable historical case is found.
+
+Priority prediction is an optional extension only if the labels are reliable and the evaluation avoids data leakage.
 
 ## Target Users
-Malaysian students looking for post-SPM or post-diploma scholarship and study-loan information.
 
-## Data Sources
-- **Source 1:** JPA scholarship / sponsorship guideline — https://www.jpa.gov.my/ *(to be finalised during Week 2 source audit)*
-- **Source 2:** MARA education sponsorship guideline — https://www.mara.gov.my/ *(to be finalised during Week 2 source audit)*
-- **Source 3:** PTPTN education loan requirements — https://www.ptptn.gov.my/ *(to be finalised during Week 2 source audit)*
+- IT help-desk agents.
+- IT support teams who triage incoming tickets.
 
-*Note:* Only source URLs, metadata, and dates checked are stored in this repository. Official documents are not redistributed.
+The system will support human decisions. It will not automatically close tickets or execute fixes.
+
+## Proposed Data Sources
+
+1. **Kaggle Customer Support Ticket Dataset** — https://www.kaggle.com/datasets/suraj520/customer-support-ticket-dataset  
+   The uploader describes over 8,000 tickets with subject, description, ticket type, priority, and resolution fields [4]. Its authenticity as organisational ITSM data is not established in the inspected description, and a public comment questions the usefulness of the resolution field. Audit the CSV and license before use; remove personal fields such as names and emails. Use recorded resolutions only if their quality is acceptable.
+2. **Microsoft / Endava ITSM ticket-classification project** — https://github.com/pourabkarchaudhuri/itsm-ticket-classification  
+   The repository describes an anonymised, labelled support-ticket dataset and classification proof-of-concept [2]. Verify current dataset availability and terms of use; the project description does not confirm reliable resolution text.
+3. **UCI Incident Management Process Enriched Event Log** — https://archive.ics.uci.edu/dataset/498/incident+management+process+enriched+event+log  
+   UCI reports 24,918 incidents and 141,712 events under CC BY 4.0, but explicitly says textual-information attributes are not included [5]. It is not suitable for TicketIQ's primary text-classification or retrieval task.
+
+## Responsible AI Risks
+
+- **Privacy:** remove personal fields before modelling and never expose them in retrieved records.
+- **Wrong resolution:** present historical resolutions as references, show the source ticket, keep a human in the loop, and abstain when similarity is too low.
+- **Missed critical categories:** report per-class metrics or macro-F1 and do not automatically downgrade serious tickets.
+- **Data leakage:** exclude post-resolution information from initial-ticket prediction, remove duplicates before data splitting, and check any priority model against rule-generated labels [6].
+
+## References
+
+[1] Al-Hawari, F. & Barham, H. (2021). “A machine learning based help desk system for IT service management.” https://doi.org/10.1016/j.jksuci.2019.04.001
+
+[2] Microsoft / Endava, “ITSM ticket classification” proof-of-concept. https://github.com/pourabkarchaudhuri/itsm-ticket-classification
+
+[3] Atlassian Support, “About suggestions on work items.” https://support.atlassian.com/jira-service-management-cloud/docs/about-suggestions-on-issue-view/
+
+[4] Suraj, “Customer Support Ticket Dataset,” Kaggle. https://www.kaggle.com/datasets/suraj520/customer-support-ticket-dataset
+
+[5] UCI Machine Learning Repository, “Incident management process enriched event log.” https://archive.ics.uci.edu/dataset/498/incident+management+process+enriched+event+log
+
+[6] ServiceNow, “Define priority lookup rules.” https://www.servicenow.com/docs/r/it-service-management/incident-management/def-prio-lookup-rules.html
 
 ## Weekly Progress
-The plan follows the SAIA 3113 AI Engineering course schedule (Weeks 1–15). Status is updated each week as deliverables are committed.
 
-| Week | Course Topic | FundLensMY Focus | Planned Deliverable | Status |
-|------|--------------|------------------|---------------------|--------|
-| W1 | T1: AI Engineering Landscape | System map + project scope | README + docs (`week1_observation_sheet.md`, `week1_system_map.png`, `week1_project_scope.md`) | Completed |
-| W2 | T2: Requirements, Architecture, Evaluation Criteria | Source audit; functional and non-functional requirements; draft architecture; initial evaluation criteria | Final document list, requirements doc, architecture diagram, evaluation criteria | Planned |
-| W3 | T3: Data Engineering (Pipelines, Lineage) | Document ingestion pipeline: extract text, clean, chunk, attach metadata (agency, document, page, date checked) | Working ingestion notebook + `src/` modules, data lineage notes | Planned |
-| W4 | T4: Data Quality and Responsible Data Practices | Data quality checks (extraction errors, duplicates, outdated versions); licensing and redistribution review | Data quality report, data documentation | Planned |
-| W5 | T5: Selecting the Right Model | Compare embedding models and LLM options (build / buy / fine-tune decision) on a small test set | Model selection report with trade-offs (accuracy, latency, cost) | Planned |
-| W6 | T6: Prompt Engineering, Structured Outputs, Guardrails | System prompt, structured JSON answer format (answer, quote, source), abstention and scope guardrails | Versioned prompts in `prompts/`, guardrail implementation | Planned |
-| W7 | Proposal Presentation | Consolidate Weeks 1–6 into the proposal | Project proposal document + Proposal presentation | Planned |
-| W8 | Semester Break | Buffer: catch up, draft the 30–50 question benchmark set with reference answers | Draft evaluation set | Planned |
-| W9 | T7: RAG and Agentic AI | Vector store, retrieval (semantic + keyword), generation with citations, citation verification, simple chat UI | Working end-to-end RAG prototype | Planned |
-| W10 | T8: Evaluating AI Systems | Run benchmark: retrieval relevance, information accuracy, citation correctness, unsupported-claim rate, latency; compare answer quality across agencies | Evaluation results in `evaluation/`, error analysis | Planned |
-| W11 | T9: CI/CD for AI | Automated tests and evaluation regression checks on every commit (GitHub Actions) | CI workflow + automated test suite | Planned |
-| W12 | T10: Deploying AI Applications | Expose the assistant as an API and a shareable web interface | Deployed demo + deployment notes | Planned |
-| W13 | T11: Observability and Continuous Improvement | Logging of queries, retrieved passages and answers; feedback capture; review of failures to improve the system | Logging and monitoring setup, improvement log | Planned |
-| W14 | T12: Responsible AI Engineering | Risk review (hallucination, outdated information, fairness across agencies), limitations and governance documentation | Responsible AI audit + final documentation | Planned |
-| W15 | AI Engineering Showcase | Final system, evidence and justification | Final presentation + final repository | Planned |
+The table below maps the course plan to proposed TicketIQ work. Weeks 2–15 are plans, not claims that the work has already been completed. The scope may be adjusted if the dataset audit shows that a feature cannot be evaluated reliably.
 
-## Disclaimer
-FundLensMY provides information extracted from official documents and is not a substitute for the agencies themselves. Users should always confirm requirements and deadlines on the official portals before applying.
+| Week | Course topic / activity | Planned TicketIQ work / output | Status |
+|---|---|---|---|
+| W1 | Topic 1 — The AI Engineering Landscape: From ML to Foundation Models | Define the problem, review initial evidence and existing approaches, identify public data candidates, and draft this README and `docs/week1_project_scope.md`. | Draft prepared; dataset audit pending |
+| W2 | Topic 2 — Planning AI Applications: Requirements, Architecture, and Evaluation Criteria | Refine project scope; define functional, non-functional, and Responsible AI requirements; set evaluation criteria; draw the V1 architecture. | Planned |
+| W3 | Topic 3 — Data Engineering for AI: Pipelines, Lineage, and Workflows | Inspect candidate files and document a repeatable workflow for loading, cleaning, splitting, and tracking the dataset. | Planned |
+| W4 | Topic 4 — Data Quality and Responsible Data Practices | Check missing values, duplicates, label quality, possible personal information, and data suitability; record what will be excluded. | Planned |
+| W5 | Topic 5 — Selecting the Right Model: Build, Buy, or Finetune | Compare simple baseline options for ticket classification and similar-ticket retrieval; justify the selected approach using feasibility and evaluation needs. | Planned |
+| W6 | Topic 6 — Integrating AI: Prompt Engineering, Structured Outputs, and Guardrails | Integrate the selected AI components. If a language model is used, define its prompts, expected output format, and guardrails; otherwise document why a non-generative baseline is sufficient. | Planned |
+| W7 | Proposal Presentation | Prepare and present the proposal using the problem evidence, scope, requirements, evaluation plan, and V1 architecture. | Planned |
+| W8 | Semester Break | No new course topic is listed. Review feedback or tidy project documentation only if needed. | Semester break |
+| W9 | Topic 7 — RAG and Agentic AI: Building Context-Aware Systems | Implement or refine retrieval of similar historical tickets and show source-ticket evidence. Use generation only if it adds value and can be grounded and evaluated. | Planned |
+| W10 | Topic 8 — Evaluating AI Systems: Functional, Non-Functional, and Fairness | Evaluate classification metrics, retrieval relevance, response time, and relevant safety/fairness checks; record limitations and failure cases. | Planned |
+| W11 | Topic 9 — CICD for AI: Automating Quality and Delivery Pipelines | Add repeatable checks for data processing, tests, and model/application changes where feasible. | Planned |
+| W12 | Topic 10 — Deploying AI Applications | Package and deploy a working prototype to a suitable project environment, subject to time and resource constraints. | Planned |
+| W13 | Topic 11 — Observability and Continuous Improvement in Production | Add basic logs and error tracking; document how failures, retrieval misses, and future data changes would be monitored. | Planned |
+| W14 | Topic 12 — Responsible AI Engineering | Review privacy, data leakage, unsafe or unsupported resolution suggestions, human oversight, and limits of the public dataset; document mitigations. | Planned |
+| W15 | AI Engineering Showcase (Presentation) | Demonstrate the prototype, explain the engineering lifecycle and evaluation results, and present limitations and future improvements. | Planned |
+
