@@ -1,6 +1,6 @@
 # TicketIQ: V1 Architecture Specification, Decisions, and Traceability
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Week 2 Conceptual V1 Architecture  
 
 ---
@@ -16,7 +16,7 @@
 
 ### 3. Why the Simple Architecture Fails TicketIQ's Requirements (Limitations)
 * **Fails Verifiable Grounding (FR2, FR3, RAI2):** A standalone model without access to an audited historical ticket store cannot retrieve real past incidents or cite verifiable source Ticket IDs.
-* **Fails Safe Abstention (FR4, RAI2):** Without an explicit relevance threshold control, a simple pipeline will force a best-guess output even when an incoming ticket represents a novel or unsupported issue.
+* **Fails Safe Abstention (FR4, RAI2):** Without an explicit relevance threshold and abstention control, a simple pipeline may return a best-guess output even when an incoming ticket represents a novel or unsupported issue, rather than explicitly indicating that no sufficiently similar historical case was found.
 * **Fails Privacy & Scope Boundaries (FR5, RAI1):** Passing raw user text directly to an AI capability without an input guardrail increases the risk of indexing or exposing Personal Identifiable Information (PII) and processing empty or out-of-domain inputs.
 * **Fails Independent Maintainability (NFR4):** Coupling historical knowledge inside model weights prevents support teams from adding newly resolved tickets toward the < 5 minute update acceptance target without retraining the model.
 
@@ -32,7 +32,7 @@ Each additional component in the TicketIQ V1 conceptual architecture is justifie
 | **FR1, NFR1, RAI3** | The system must predict a primary ticket category and confidence score across imbalanced classes using only submission-time fields. Performance will be evaluated against the Macro-F1 >= 0.70 acceptance target. | **Ticket Classification Capability** |
 | **FR2, NFR2, NFR4** | The system must search historical incidents and support adding new resolved tickets (targeting < 5 minutes update time) without retraining the classifier. | **Similarity Retrieval Capability** connected to an external **Historical Ticket Knowledge Source** |
 | **FR3, FR4, RAI2** | Recorded resolutions must only be displayed when match similarity meets the usefulness threshold, always accompanied by a source Ticket ID; otherwise, the system must abstain. | **Relevance & Abstention Control** |
-| **NFR1, NFR2, NFR3, RAI2, RAI3** | The system must log predictions, similarity scores, abstention decisions, source IDs, and end-to-end execution latency (evaluated against the p90 < 2,000 ms acceptance target) for systematic evaluation. | **Evaluation & Telemetry Point** |
+| **NFR1, NFR2, NFR3, RAI1, RAI2, RAI3** | The system must record classification predictions, confidence scores, retrieval scores, abstention decisions, source IDs, and end-to-end latency for systematic evaluation against the p90 < 2,000 ms acceptance target. Telemetry must avoid storing raw ticket text or unredacted PII unless explicitly necessary and appropriately protected. | **Evaluation & Telemetry Point** |
 | **RAI4** | Historical data must be deduplicated, redacted for configured PII patterns, audited for resolution quality, and separated from post-submission leakage fields prior to indexing. | **Offline Data Audit & Sanitization Pipeline** (feeding the Historical Ticket Knowledge Source) |
 
 ---
@@ -48,7 +48,7 @@ To adhere to V1 conceptual design principles, components are defined by their fu
 3. **Input Scope & Privacy Control:** Validates that the query is non-empty support text (`FR5`) and redacts configured PII patterns (`RAI1`) before forwarding sanitised text to downstream AI capabilities.
 4. **Ticket Classification Capability:** Generates the primary category prediction and confidence score (`FR1`, `NFR1`, `RAI3`).
 5. **Similarity Retrieval Capability:** Queries the knowledge source to rank and return the top-3 most similar historical ticket records (`FR2`, `NFR2`).
-6. **Historical Ticket Knowledge Source:** Stores audited, deduplicated, and PII-redacted historical tickets, including available ticket identifiers, initial descriptions, categories, and resolutions that pass the data-quality checks (`NFR4`, `RAI1`, `RAI4`).
+6. **Historical Ticket Knowledge Source:** Stores audited, deduplicated historical tickets processed through the configured PII-redaction pipeline, including available ticket identifiers, initial descriptions, categories, and resolutions that pass the data-quality checks (`NFR4`, `RAI1`, `RAI4`).
 7. **Relevance & Abstention Control:** Evaluates whether retrieved candidates meet the defined similarity threshold. Passes usable recorded resolutions with Source IDs (`FR3`, `RAI2`) or triggers an explicit abstention alert for manual triage (`FR4`, `RAI2`). The similarity threshold is a retrieval filter, not proof that a historical resolution is correct or applicable. Retrieved resolutions remain historical references and require human verification.
 8. **Evaluation & Telemetry Point:** Captures latency metrics, classification outputs, retrieval scores, and abstention flags for offline benchmark validation against acceptance targets (`NFR1-NFR5`, `RAI1-RAI3`).
 
