@@ -72,23 +72,22 @@ The system will support human decisions. It will not automatically close tickets
 
 ## Weekly Progress
 
-The table below maps the course plan to proposed TicketIQ work. Weeks 2–15 are plans, not claims that the work has already been completed. The scope may be adjusted if the dataset audit shows that a feature cannot be evaluated reliably.
+This is an initial project roadmap and may change after the dataset audit and proposal feedback. Planned work is not marked as completed in advance.
 
-| Week | Course topic / activity | Planned TicketIQ work / output | Status |
+| Week | Planned work | Expected output | Status |
 |---|---|---|---|
-| W1 | Topic 1 — The AI Engineering Landscape: From ML to Foundation Models | Define the problem, review initial evidence and existing approaches, identify public data candidates, and draft this README and `docs/week1_project_scope.md`. | Draft prepared; dataset audit pending |
-| W2 | Topic 2 — Planning AI Applications: Requirements, Architecture, and Evaluation Criteria | Refine project scope; define functional, non-functional, and Responsible AI requirements; set evaluation criteria; draw the V1 architecture. | Planned |
-| W3 | Topic 3 — Data Engineering for AI: Pipelines, Lineage, and Workflows | Inspect candidate files and document a repeatable workflow for loading, cleaning, splitting, and tracking the dataset. | Planned |
-| W4 | Topic 4 — Data Quality and Responsible Data Practices | Check missing values, duplicates, label quality, possible personal information, and data suitability; record what will be excluded. | Planned |
-| W5 | Topic 5 — Selecting the Right Model: Build, Buy, or Finetune | Compare simple baseline options for ticket classification and similar-ticket retrieval; justify the selected approach using feasibility and evaluation needs. | Planned |
-| W6 | Topic 6 — Integrating AI: Prompt Engineering, Structured Outputs, and Guardrails | Integrate the selected AI components. If a language model is used, define its prompts, expected output format, and guardrails; otherwise document why a non-generative baseline is sufficient. | Planned |
-| W7 | Proposal Presentation | Prepare and present the proposal using the problem evidence, scope, requirements, evaluation plan, and V1 architecture. | Planned |
-| W8 | Semester Break | No new course topic is listed. Review feedback or tidy project documentation only if needed. | Semester break |
-| W9 | Topic 7 — RAG and Agentic AI: Building Context-Aware Systems | Implement or refine retrieval of similar historical tickets and show source-ticket evidence. Use generation only if it adds value and can be grounded and evaluated. | Planned |
-| W10 | Topic 8 — Evaluating AI Systems: Functional, Non-Functional, and Fairness | Evaluate classification metrics, retrieval relevance, response time, and relevant safety/fairness checks; record limitations and failure cases. | Planned |
-| W11 | Topic 9 — CICD for AI: Automating Quality and Delivery Pipelines | Add repeatable checks for data processing, tests, and model/application changes where feasible. | Planned |
-| W12 | Topic 10 — Deploying AI Applications | Package and deploy a working prototype to a suitable project environment, subject to time and resource constraints. | Planned |
-| W13 | Topic 11 — Observability and Continuous Improvement in Production | Add basic logs and error tracking; document how failures, retrieval misses, and future data changes would be monitored. | Planned |
-| W14 | Topic 12 — Responsible AI Engineering | Review privacy, data leakage, unsafe or unsupported resolution suggestions, human oversight, and limits of the public dataset; document mitigations. | Planned |
-| W15 | AI Engineering Showcase (Presentation) | Demonstrate the prototype, explain the engineering lifecycle and evaluation results, and present limitations and future improvements. | Planned |
-
+| W1 | Define the problem, review initial evidence and existing solutions, and identify possible public datasets. | Project scope draft and initial README. | Draft prepared; dataset audit pending |
+| W2 | Finalise the project boundaries, main requirements, evaluation plan, and high-level design. | Requirements, evaluation criteria, and V1 architecture. | Planned |
+| W3 | Download and inspect candidate datasets; set up a repeatable process to load and prepare the chosen data. | Dataset notes and initial data-preparation workflow. | Planned |
+| W4 | Check data quality, labels, duplicates, missing values, privacy concerns, and possible data leakage. | Data audit and cleaning decisions. | Planned |
+| W5 | Choose practical baseline methods for classifying ticket text and finding similar cases. | Model-choice rationale and baseline experiment plan. | Planned |
+| W6 | Build an early end-to-end prototype using the prepared data and selected baseline methods. | First working pipeline or prototype. | Planned |
+| W7 | Present the proposal and refine the project based on feedback. | Proposal slides and updated scope. | Planned |
+| W8 | Semester break; keep the workload light and organise notes or backlog if needed. | Updated task list, if needed. | Semester break |
+| W9 | Improve similar-ticket search and connect retrieved cases to their recorded resolution where the data supports it. | Retrieval workflow with visible source cases. | Planned |
+| W10 | Test the system on held-out data and inspect incorrect classifications and irrelevant matches. | Evaluation results and error analysis. | Planned |
+| W11 | Add repeatable tests for data processing and core application behaviour; automate suitable checks where feasible. | Basic test suite and quality checks. | Planned |
+| W12 | Package the prototype so another person can run or access it in the intended project environment. | Demonstrable deployed or locally runnable prototype. | Planned |
+| W13 | Add basic error logging and record cases where predictions or retrieval perform poorly. | Logs and a short improvement plan. | Planned |
+| W14 | Review privacy, human oversight, unsupported suggestions, and other Responsible AI risks; apply practical safeguards. | Responsible AI review and documented mitigations. | Planned |
+| W15 | Demonstrate TicketIQ, explain the approach and evaluation results, and be clear about limitations and future work. | Final showcase and project summary. | Planned |
