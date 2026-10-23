@@ -77,7 +77,7 @@ This is an initial project roadmap and may change after the dataset audit and pr
 | Week | Planned work | Expected output | Status |
 |---|---|---|---|
 | W1 | Define the problem, review initial evidence and existing solutions, and identify possible public datasets. | Project scope draft and initial README. | Draft prepared; dataset audit pending |
-| W2 | Finalise the project boundaries, main requirements, evaluation plan, and high-level design. | Requirements, evaluation criteria, and V1 architecture. | Planned |
+| W2 | Finalise the project boundaries, main requirements, evaluation plan, and high-level design. | Requirements, evaluation criteria, and V1 architecture. | Completed |
 | W3 | Download and inspect candidate datasets; set up a repeatable process to load and prepare the chosen data. | Dataset notes and initial data-preparation workflow. | Planned |
 | W4 | Check data quality, labels, duplicates, missing values, privacy concerns, and possible data leakage. | Data audit and cleaning decisions. | Planned |
 | W5 | Choose practical baseline methods for classifying ticket text and finding similar cases. | Model-choice rationale and baseline experiment plan. | Planned |
